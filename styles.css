@@ -1,3 +1,39 @@
 nav {
     padding-left: 10px !important;
 }
+
+body {
+    /*background-image: url("https://files.enderman.ch/wallpapers/Reflection.jpg");*/
+}
+
+.p-4 {
+    margin-top: 15px;
+    /*background-color: #2125299b;*/
+    background-color: var(--bs-primary-bg-subtle);
+    backdrop-filter: blur(25px);
+    border: var(--bs-border-width) solid var(--bs-primary);
+    border-radius: 15px;
+    /*box-shadow: 0px 0px 40px 0px #000000;*/
+    transition: 1s;
+}
+
+.p-4:hover {
+    /*box-shadow: 0px 0px 40px 0px var(--bs-primary);*/
+}
+
+
+pre,
+pre code {
+    background-color: var(--bs-secondary-bg-subtle) !important;
+}
+
+pre {
+    margin-top: 15px !important;
+    border-radius: 15px;
+    border: var(--bs-border-width) solid var(--bs-secondary) !important;
+    padding-bottom: 5px;
+}
+
+.cpbtn {
+    background-image: linear-gradient(to right, #0057b9, #3695ff);
+}
