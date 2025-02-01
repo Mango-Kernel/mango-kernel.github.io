@@ -14,6 +14,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cs.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+        <script src="/codeblock.js"></script>
         <link rel="stylesheet" href="/dracula.css">
         <script>hljs.highlightAll();</script>
         <meta property="og:title" content="Mango">
@@ -22,7 +23,7 @@
         <!--<meta property="og:image" content="https://mango-kernel.github.io/img/logo.png">-->
     </head>
     <body data-bs-theme="dark">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="index.html">Mango</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -31,28 +32,30 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="/index.html">Home</a>
+                  <a class="nav-link" href="/index.html"><i class="bi bi-house"></i> Home</a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="/docs/index.html">Documentation <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/docs/index.html"><i class="bi bi-file-text-fill"></i> Documentation</a>
                 <li class="nav-item">
-                  <a class="nav-link" href="https://github.com/Mango-Kernel">GitHub</a>
+                  <a class="nav-link" href="https://github.com/Mango-Kernel"><i class="bi bi-github"></i> GitHub</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link disabled" href="#">Hosting (Coming soon!)</a>
+                  <a class="nav-link disabled" href="#"><i class="bi bi-hdd-network"></i> Hosting (Coming soon!)</a>
                 </li>
               </ul>
             </div>
           </nav>
           <div class="container-fluid">
-            <div class="p-4">
+            <!--<div class="p-4">-->
+              <br>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                  <h4 class="text-white">Hello, World!</h4>
-                  <span class="text-muted">Hello</span>
+                  <h4 class="text-white">Welcome to the PotatoOS documentation (work in progress)</h4>
+                  <span class="text-muted">PotatoOS uses it's own lightweight multiboot kernel</span>
+                  <br>
+                  <span class="text-muted">The source code for PotatoOS can be found <a href="https://github.com/winvistalover/PotatoOS">here.</a></span>
                 </li>
-              </ul>
-              <ul class="list-group list-group-flush">
+              <ul class="list-group">
                 <li class="list-group-item">
                   <expandable id="getting-started">
                     <details>
@@ -64,16 +67,20 @@
                             <li>QEMU (optional)</li>
                             <li>Make</li>
                         </ul>
-                        <expandable>
-                            <details>
-                                <summary>ArchLinux</summary>
-                                <p class="text-muted">If you haven't installed yay, follow this <a href="https://itsfoss.com/install-yay-arch-linux/">guide</a></p>
-                                <pre><code class="language-bash">pacman -S make git
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                              <expandable>
+                                  <details>
+                                      <summary>ArchLinux</summary>
+                                      <p class="text-muted">If you haven't installed yay, follow this <a href="https://itsfoss.com/install-yay-arch-linux/">guide</a></p>
+                                      <pre><code class="language-bash">pacman -S make git
 yay -S i686-elf-gcc</code></pre>
-                                <p class="text-muted">To install QEMU, run:</p>
-                                <pre><code class="language-bash">pacman -S qemu</code></pre>
-                            </details>
-                        </expandable>
+                                      <p class="text-muted">To install QEMU, run:</p>
+                                      <pre><code class="language-bash">pacman -S qemu</code></pre>
+                                  </details>
+                              </expandable>
+                            </li>
+                        </ul>
                         <p class="text-muted">To clone the repository, run:</p>
                         <pre><code class="language-bash">git clone https://github.com/winvistalover/PotatoOS.git</code></pre>
                     </details>
@@ -85,8 +92,9 @@ yay -S i686-elf-gcc</code></pre>
                           <summary>Building</summary>
                           <p class="text-muted">To build the operating system, run:</p>
                           <pre><code class="language-bash">sh build.sh</code></pre>
-                          <p class="text-muted">To build the operating system and make an iso, run:</p>
+                          <p class="text-muted">To build the operating system and make an ISO, run:</p>
                           <pre><code class="language-bash">sh iso.sh</code></pre>
+                          <p class="text-muted">This will output "mango.elf" in the root directory of the ISO image</p>
                       </details>
                   </expandable>
                 </li>
@@ -96,14 +104,54 @@ yay -S i686-elf-gcc</code></pre>
                           <summary>Running</summary>
                           <p class="text-muted">To run the operating system, run:</p>
                           <pre><code class="language-bash">sh qemu.sh</code></pre>
+                          <p class="text-muted">Or:</p>
+                          <pre><code class="language-bash">qemu-system-i386 -cdrom potatoOS.iso</code></pre>
                       </details>
                   </expandable>
-              </ul>
+                </li>
+                <li class="list-group-item">
+                  <expandable id="modifying">
+                      <details>
+                          <summary>Modifying</summary>
+                          <p class="text-muted">The operating system contains multiple files (tty.c, vga.h, etc) in the "kernel/arch/i386" directory.<br></p>
+                          <p class="text-muted">To modify the operating system, you can edit these files using a text editor (e.g, nano).</p>
+                          <p class="text-muted">Each file serves a different purpose:</p>
+                          <table class="table table-bordered table-striped table-hover" style="width: 900px;">
+                              <thead>
+                                  <tr>
+                                      <th scope="col"><i class="bi bi-file-earmark-code"></i> File</th>
+                                      <th scope="col"><i class="bi bi-card-text"></i> Description</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>kernel/arch/i386/tty.c</td>
+                                      <td>Contains the code for the terminal</td>
+                                  </tr>
+                                  <tr>
+                                      <td>kernel/arch/i386/vga.h</td>
+                                      <td>Contains the code for the VGA driver</td>
+                                  </tr>
+                                  <tr>
+                                      <td>kernel/arch/i386/boot.S</td>
+                                      <td>Contains the code for a bootloader (e.g, GRUB) to load</td>
+                                  </tr>
+                                  <tr>
+                                      <td>kernel/arch/i386/linker.ld</td>
+                                      <td>Contains the code for the linker</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </details>
+                  </expandable>
+                </li>
 
-            <script>
+              </ul>
+              </ul>
+              <script>
                 document.querySelectorAll('code').forEach((block) => {
                     const button = document.createElement('button');
-                    button.innerText = 'Copy';
+                    button.innerHTML = '<i class="bi bi-clipboard"></i>';
                     button.className = 'btn btn-primary btn-sm cpbtn';
                     button.style.float = 'left';
                     button.style.margin = '5px';
@@ -111,16 +159,18 @@ yay -S i686-elf-gcc</code></pre>
                     button.style.borderRadius = '55px';
                     button.onclick = () => {
                         navigator.clipboard.writeText(block.innerText);
-                        button.innerText = 'Copied!';
+                        button.innerHTML = '<i class="bi bi-clipboard-check"> Copied!</i>';
+                        button.className = 'btn btn-success btn-sm';
                         setTimeout(() => {
-                            button.innerText = 'Copy';
+                            button.innerHTML = '<i class="bi bi-clipboard"></i>';
+                            button.className = 'btn btn-primary btn-sm cpbtn';
                         }, 2000);
                     };
                     block.parentNode.appendChild(button);
                 });
+              </script>
 
-            </script>
-            </div> 
+            <!--</div>--> 
           </div>
     </body>
 </html>

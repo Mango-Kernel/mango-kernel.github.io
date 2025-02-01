@@ -22,7 +22,7 @@
         <!--<meta property="og:image" content="https://mango-kernel.github.io/img/logo.png">-->
     </head>
     <body data-bs-theme="dark">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="index.html">Mango</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -31,15 +31,15 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/index.html"><i class="bi bi-house-fill"></i> Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/docs/index.html">Documentation</a>
+                  <a class="nav-link" href="/docs/index.html"><i class="bi bi-file-text"></i> Documentation</a>
                 <li class="nav-item">
-                  <a class="nav-link" href="https://github.com/Mango-Kernel">GitHub</a>
+                  <a class="nav-link" href="https://github.com/Mango-Kernel"><i class="bi bi-github"></i> GitHub</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link disabled" href="#">Hosting (Coming soon!)</a>
+                  <a class="nav-link disabled" href="#"><i class="bi bi-hdd-network"></i> Hosting (Coming soon!)</a>
                 </li>
               </ul>
             </div>
@@ -47,18 +47,18 @@
           <div class="container-fluid">
             <div class="p-4">
                 <div class="alert alert-warning" role="warning">
-                    <h4 class="alert-heading">Warning</h4>
-                    <p>This site is still in development.</p>
-                    <button class="btn btn-warning" data-bs-dismiss="alert">Ok</button>
+                  <h4 id="setup"></h1>
+                  <p id="punchline"></p>
+                  <button class="btn btn-warning btn-sm" data-bs-dismiss="alert">Ok</button>
+                  <button class="btn btn-warning btn-sm" onclick="joke()">New joke</button>
                 </div> 
-              <h4 class="text-white">Hello, World!</h4>
-              <span class="text-muted">Hello</span>
+              <h4>Welcome to the mango home page!</h1>
              
 
             <script>
                 document.querySelectorAll('code').forEach((block) => {
                     const button = document.createElement('button');
-                    button.innerText = 'Copy';
+                    button.innerHTML = '<i class="bi bi-clipboard"></i>';
                     button.className = 'btn btn-primary btn-sm cpbtn';
                     button.style.float = 'left';
                     button.style.margin = '5px';
@@ -66,14 +66,29 @@
                     button.style.borderRadius = '55px';
                     button.onclick = () => {
                         navigator.clipboard.writeText(block.innerText);
-                        button.innerText = 'Copied!';
+                        button.innerHTML = '<i class="bi bi-clipboard-check"> Copied!</i>';
+                        button.className = 'btn btn-success btn-sm';
                         setTimeout(() => {
-                            button.innerText = 'Copy';
+                            button.innerHTML = '<i class="bi bi-clipboard"></i>';
+                            button.className = 'btn btn-primary btn-sm cpbtn';
                         }, 2000);
                     };
                     block.parentNode.appendChild(button);
                 });
 
+            </script>
+            
+              <script>
+                joke();
+                function joke() {
+                  fetch("https://official-joke-api.appspot.com/random_joke")
+                      .then(response => response.json())
+                      .then(data => {
+                          document.getElementById("setup").textContent = data.setup;
+                          document.getElementById("punchline").textContent = data.punchline;
+                      })
+                      .catch(error => console.error("Error fetching joke:", error));
+                }
             </script>
             </div> 
           </div>

@@ -20,6 +20,9 @@ body {
 .p-4:hover {
     /*box-shadow: 0px 0px 40px 0px var(--bs-primary);*/
 }
+.btn {
+    transition: all 1s;
+}
 
 
 pre,
@@ -35,5 +38,7 @@ pre {
 }
 
 .cpbtn {
-    background-image: linear-gradient(to right, #0057b9, #3695ff);
+    background-color: transparent;
+    background: none !important;
+    border-color: transparent !important;
 }
